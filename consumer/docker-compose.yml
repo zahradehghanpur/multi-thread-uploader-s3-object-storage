@@ -1,0 +1,26 @@
+version: '3'
+services:
+   consumer1:
+     build: . 
+     command: python consumer.py
+     environment:
+       REDIS_HOST: "redis"
+       REDIS_PORT: 6379
+       QUEUE_NAME: "original"
+       BUFFER_NAME: "consumer1-1"
+       BUFFER_COUNT: 1000
+       SECRET_ACCESS_KEY: "YOUR_SECRET_KEY" 
+       ACCESS_KEY_ID: "YOUR_ACCESS_KEY"
+       ENDPOINT_URL: "YOUR_ENDPOINT"
+       #DESTINATION_DIR: "./"
+       LOG_LEVEL: "DEBUG"
+       BUCKET_NAME: "public"
+       PROCESS_COUNT: "2"
+       OBJECT_QUEUE: "public"
+     networks:
+       - static-network
+networks:
+  static-network:
+    name: br-public_nw
+    external: true
+

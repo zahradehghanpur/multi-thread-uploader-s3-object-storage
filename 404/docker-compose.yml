@@ -1,0 +1,55 @@
+version: '3'
+services:
+   redis:
+     network_mode: host
+     image: redis:7.0.7
+     ports:
+       - 6379:6379
+     volumes:
+       - ./redis-data:/data
+
+   producer:
+     network_mode: host
+     build: . 
+     command: python producer.py
+     environment:
+       DESTINATION_DIR: "./"
+       LOG_LEVEL: "DEBUG"
+       REDIS_HOST: "127.0.0.1"
+       REDIS_PORT: 6379
+       QUEUE_NAME: "miss"
+
+     volumes:
+       - /OSS:/OSS
+   consumer:
+     network_mode: host
+     build: . 
+     command: python consumer.py
+     environment:
+       DESTINATION_DIR: "./"
+       LOG_LEVEL: "DEBUG"
+       REDIS_HOST: "127.0.0.1"
+       REDIS_PORT: 6379
+       QUEUE_NAME: "miss"
+       SECRET_ACCESS_KEY: "rCRnQb49Clet4J5tpCVp7eKvPszRxuhAjFVs9hKQ"
+       ACCESS_KEY_ID: "0HZK1W5FCQM42S4OMVZV"
+       ENDPOINT_URL: "http://172.17.26.47:8080"
+       BUCKET_NAME: "binguli-public-blaum"
+       STORAGE_CLASS: "blaum_roth"
+
+     volumes:
+       - /OSS:/OSS
+         #miss:
+         #  network_mode: host
+         #  build: . 
+         #  command: python goh.py
+         #  environment:
+         #    DESTINATION_DIR: "./"
+         #    LOG_LEVEL: "DEBUG"
+         #    SECRET_ACCESS_KEY: "rCRnQb49Clet4J5tpCVp7eKvPszRxuhAjFVs9hKQ"
+         #    ACCESS_KEY_ID: "0HZK1W5FCQM42S4OMVZV"
+         #    ENDPOINT_URL: "http://172.17.26.47:8080"
+         #    BUCKET_NAME: "binguli-public-blaum"
+         #    STORAGE_CLASS: "blaum_roth"
+         #  volumes:
+         #    - /OSS:/OSS
