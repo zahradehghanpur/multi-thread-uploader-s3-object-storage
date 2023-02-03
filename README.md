@@ -32,7 +32,7 @@ ENDPOINT_URL: endpoint of your s3
 BUCKET_NAME: the name of the bucket you want to upload to.
 PROCESS_COUNT: how many threads should run 
 OBJECT_QUEUE: the name of queue in redis that each consumer store the name of the files that successfully uploaded to s3.
-
+```
 
 ## Scale Consumer
 the consumer is designed to scale in case of needed. for scale you can use docker compose scale command or add how many consumers as a service in docker-compose file
