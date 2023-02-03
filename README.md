@@ -1,4 +1,4 @@
-# mukti-thread-uploader-s3-object-storage
+# multi-thread-uploader-s3-object-storage
 This code upload from a large scale local directory to s3 object storage. you can scale consumer numbers and number of threads each consumer run.
 This code containse two parts:
 producer and consumer
